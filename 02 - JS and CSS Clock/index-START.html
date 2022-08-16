@@ -65,6 +65,8 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: right;
+      transform: rotate(90deg);
     }
   </style>
 
@@ -74,30 +76,38 @@
     const secondHand = document.querySelector('.second-hand')
     console.log(hourHand, minuteHand, secondHand);
 
-    const CLOCK_FORMAT = {
-      "H12": 12,
-      "H24": 24
-    };
 
-    // get system time
-    let currentDateTime = new Date();
-    let currentHour = currentDateTime.getHours() % CLOCK_FORMAT.H12;
-    let currentMinute = currentDateTime.getMinutes() % 60;
-    let currentSecond = currentDateTime.getSeconds() % 60;
+    function timer() {
+      const CLOCK_FORMAT = {
+        "H12": 12,
+        "H24": 24
+      };
 
-    // calculate rotation based on each criteria
-    const rotationDegreeForHour = 30;
-    const rotationDegreeForMinute = 6;
-    const rotationDegreeForSecond = 6;
+      // get system time
+      let currentDateTime = new Date();
+      let currentHour = currentDateTime.getHours() % CLOCK_FORMAT.H12;
+      let currentMinute = currentDateTime.getMinutes() % 60;
+      let currentSecond = currentDateTime.getSeconds() % 60;
 
-    let hoursAngle = currentHour * rotationDegreeForHour;
-    let minuteAngle = currentMinute * rotationDegreeForMinute;
-    let secondAngle = currentSecond * rotationDegreeForSecond;
+      // calculate rotation based on each criteria
+      const rotationDegreeForHour = 30;
+      const rotationDegreeForMinute = 6;
+      const rotationDegreeForSecond = 6;
 
-    console.log(hoursAngle,
-      minuteAngle,
-      secondAngle
-    )
+      let hoursDegree = (currentHour * rotationDegreeForHour) + 90;
+      let minuteDegree = (currentMinute * rotationDegreeForMinute) + 90;
+      let secondDegree = (currentSecond * rotationDegreeForSecond) + 90;
+
+      console.log(currentSecond);
+      hourHand.style.transform = `rotate(${hoursDegree}deg)`;
+      minuteHand.style.transform = `rotate(${minuteDegree}deg)`;
+      secondHand.style.transform = `rotate(${secondDegree}deg)`;
+
+
+    }
+
+    timer();
+    setInterval(timer, 1000);
 
 
 
