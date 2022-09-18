@@ -27,10 +27,16 @@
       misc styles, nothing to do with CSS variables
     */
 
+    :root {
+      --defaultPadding: 10px;
+      --defaultColor: yellow;
+      --dafultBluring: 5px;
+    }
+
     body {
       text-align: center;
       background: #193549;
-      color: white;
+      color: var(--defaultColor);
       font-family: 'helvetica neue', sans-serif;
       font-weight: 100;
       font-size: 50px;
@@ -51,7 +57,14 @@
     const blurInput = document.querySelector(".controls input[id='blur']");
     const baseColor = document.querySelector(".controls input[id='base']");
 
-    console.log(spacing);
+    baseColor.addEventListener("input", updateColor, false);
+
+    function updateColor(e) {
+      document.documentElement.style.setProperty(`--defaultColor`, e.currentTarget.value);
+    }
+
+
+
   </script>
 
 </body>
