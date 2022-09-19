@@ -11,10 +11,10 @@
 
   <div class="controls">
     <label for="spacing">Spacing:</label>
-    <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+    <input id="spacing" type="range" name="spacing" min="0" max="200" value="0" data-sizing="px">
 
     <label for="blur">Blur:</label>
-    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+    <input id="blur" type="range" name="blur" min="0" max="25" value="0" data-sizing="px">
 
     <label for="base">Base Color</label>
     <input id="base" type="color" name="base" value="#ffc600">
@@ -28,9 +28,9 @@
     */
 
     :root {
-      --defaultPadding: 10px;
+      --defaultPadding: 1px;
       --defaultColor: yellow;
-      --dafultBluring: 5px;
+      --defaultBlurring: 1px;
     }
 
     body {
@@ -49,6 +49,12 @@
     input {
       width: 100px;
     }
+
+    img {
+      background-color: var(--defaultColor);
+      filter: blur(var(--defaultBlurring));
+      padding: var(--defaultPadding);
+    }
   </style>
 
   <script>
@@ -57,10 +63,24 @@
     const blurInput = document.querySelector(".controls input[id='blur']");
     const baseColor = document.querySelector(".controls input[id='base']");
 
-    baseColor.addEventListener("input", updateColor, false);
 
+    spacingInput.addEventListener("input", addPadding, false);
+
+    function addPadding(e) {
+      console.log(e);
+      document.documentElement.style.setProperty("--defaultPadding", e.currentTarget.value + "px");
+    }
+
+
+    blurInput.addEventListener("input", blurPicture, false);
+    function blurPicture(e) {
+      document.documentElement.style.setProperty("--defaultBlurring", e.currentTarget.value + "px");
+    }
+
+
+    baseColor.addEventListener("input", updateColor, false);
     function updateColor(e) {
-      document.documentElement.style.setProperty(`--defaultColor`, e.currentTarget.value);
+      document.documentElement.style.setProperty("--defaultColor", e.currentTarget.value);
     }
 
 
