@@ -204,18 +204,27 @@
     function hasDe(word) {
       return word.includes('de');
     }
-    console.log(boulevardsNames);
-
-    //console.log(boulevardsNames);
-
-
+    // console.log(boulevardsNames);
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const orderedPeople = people.sort();
+    console.log(orderedPeople);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck'];
+    debugger;
+    const transportation = data.reduce(function (obj, item) {
+      if (!obj[item]) {
+        obj[item] = 0;
+      }
+      obj[item]++;
+      return obj;
+    }, {});
+
+    console.log(transportation);
+
 
   </script>
 </body>
