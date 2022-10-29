@@ -20,21 +20,27 @@
     const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
     const cities = [];
+    let resultCities = [];
     fetch(endpoint)
       .then(response => response.json())
       .then(data => cities.push(...data));
 
+    const suggestion = document.querySelector(".suggestions");
     const searchInput = document.querySelector(".search-form .search");
     const textValue = searchInput.addEventListener('input', updateValue);
 
     function updateValue(e) {
       let searchText = e.target.value;
       searchInput.textContent = searchText;
-      console.log(e.target.value);
       const regex = new RegExp(searchText, 'gi')
-      console.log(regex);
-      let result = cities.filter(sss => sss.city.match(regex));
-      console.log(result);
+      resultCities = cities.filter(sss => sss.city.match(regex));
+      let last = resultCities.map((createList1) =>
+        `<li>City Name: ${createList1.city}</li><li>State Name:${createList1.state}</li>`);
+      console.log(last);
+      suggestion.innerHTML = last.join("");
+      //last.replace(',', "");
+      // suggestion.innerHTML = last;
+
 
     }
 
