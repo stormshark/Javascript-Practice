@@ -24,13 +24,17 @@
       .then(response => response.json())
       .then(data => cities.push(...data));
 
-    const searchedText = document.querySelector(".search-form .search");
-    const textValue = searchedText.addEventListener('input', updateValue);
+    const searchInput = document.querySelector(".search-form .search");
+    const textValue = searchInput.addEventListener('input', updateValue);
 
     function updateValue(e) {
-      searchedText.textContent = e.target.value;
+      let searchText = e.target.value;
+      searchInput.textContent = searchText;
       console.log(e.target.value);
-      cities.filter(sss => sss)
+      const regex = new RegExp(searchText, 'gi')
+      console.log(regex);
+      let result = cities.filter(sss => sss.city.match(regex));
+      console.log(result);
 
     }
 
