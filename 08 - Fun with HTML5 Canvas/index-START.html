@@ -1,19 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>HTML5 Canvas</title>
 </head>
-<body>
-<canvas id="draw" width="800" height="800"></canvas>
-<script>
-</script>
 
-<style>
-  html, body {
-    margin: 0;
-  }
-</style>
+<body>
+  <canvas id="draw" width="800" height="800"></canvas>
+  <script>
+    const canvas = document.querySelector("#draw");
+    const content = canvas.getContext("2d");
+
+    content.fillStyle = "#cce7e8";
+    content.fillRect(0, 0, 800, 800);
+
+    let isDrawing = false;
+    let startPointX = 0;
+    let startPointY = 0;
+    canvas.addEventListener('mouseup', () => isDrawing = false);
+    canvas.addEventListener('mouseout', () => isDrawing = false);
+    canvas.addEventListener('mousedown', (e) => {
+      startPointX = e.offsetX;
+      startPointY = e.offsetY;
+      isDrawing = true
+    });
+    canvas.addEventListener('mousemove', drawFreelyHand);
+
+    function drawFreelyHand(e) {
+      if (isDrawing) {
+        content.beginPath();
+        content.moveTo(startPointX, startPointY);
+        content.lineTo(e.offsetX, e.offsetY);
+        content.stroke();
+        startPointX = e.offsetX;
+        startPointY = e.offsetY;
+      }
+    }
+
+
+
+  </script>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+    }
+  </style>
 
 </body>
+
 </html>
