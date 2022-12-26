@@ -109,8 +109,32 @@
       if (e.keyCode == 16) { IsShiftHolding = false }
     });
 
-    const checkBoxes = document.querySelectorAll('.item');
-    checkBoxes.forEach((item, idx) => item.addEventListener("click", (e) => { console.log(e.currentTarget, idx); }));
+    const checkBoxes = document.querySelectorAll('.item input[type=checkbox]');
+    let firstSelection;
+    let lastSelection;
+    checkBoxes.forEach((item, idx) => item.addEventListener("change", (e) => {
+
+
+      if (IsShiftHolding) {
+        lastSelection = idx;
+
+        checkBoxes.forEach((item2, idx2) => {
+
+          if (firstSelection <= idx2 && idx2 <= lastSelection) {
+            console.log(firstSelection, lastSelection, idx2);
+            item2.checked = true
+          }
+          if (lastSelection <= idx2 && idx2 <= firstSelection) {
+            console.log(firstSelection, lastSelection, idx2);
+            item2.checked = true
+          }
+
+        });
+      } else firstSelection = idx;
+
+
+
+    }));
 
 
 
