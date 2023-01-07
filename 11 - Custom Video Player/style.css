@@ -59,7 +59,7 @@ body {
 }
 
 .player__slider {
-  width: 10px;
+  width: 5px;
   height: 30px;
 }
 
@@ -101,7 +101,7 @@ body {
   width: 50%;
   background: #ffc600;
   flex: 0;
-  flex-basis: 50%;
+  flex-basis: 1%;
 }
 
 /* unholy css to style input type="range" */
