@@ -1,12 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Key Detection</title>
   <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
 </head>
+
 <body>
-<script>
-</script>
+  <script>
+    const secretKey = "YGY";
+    let typedCharacters = [];
+
+    window.addEventListener('keydown', getKeysIntoArray)
+
+    function getKeysIntoArray(e) {
+      const secretKeySize = secretKey.length;
+
+      typedCharacters.push(e.key);
+
+
+      let newArray = typedCharacters.slice(typedCharacters.length - secretKeySize);
+      console.log(newArray);
+
+      if (secretKey == newArray.join('')) {
+        console.log("secret key is founded");
+        cornify_add();
+      };
+
+
+
+    }
+
+  </script>
 </body>
+
 </html>
