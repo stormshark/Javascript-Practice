@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>JS Reference VS Copy</title>
 </head>
+
 <body>
 
   <script>
@@ -13,6 +15,10 @@
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
     // and we want to make a copy of it.
+    const newPlayers = [...players];
+    const newPlayers2 = players.slice();
+    const newPlayers3 = [].concat(players);
+    const newPlayers4 = Array.from(players);
 
     // You might think we can just do something like this:
 
@@ -43,6 +49,9 @@
     };
 
     // and think we make a copy:
+    const person2 = Object.assign({}, person);  //shallow
+
+    const person3 = JSON.parse(JSON.stringify(person));
 
     // how do we take a copy instead?
 
@@ -53,4 +62,5 @@
   </script>
 
 </body>
+
 </html>
