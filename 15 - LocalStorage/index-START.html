@@ -45,13 +45,14 @@
   <script>
     const addItems = document.querySelector('.add-items');
     const itemsList = document.querySelector('.plates');
-    const items = [];
+    let items = JSON.parse(loadFromLocalStorage()) || [];
+    render();
+
 
     addItems.addEventListener('submit', addItem);
 
     function addItem(e) {
       e.preventDefault();
-      console.log("You are innnnnnnn")
       const text = (this.querySelector('[name=item]')).value;
       const item = {
         text,
@@ -59,15 +60,26 @@
       };
       items.push(item);
       (this.querySelector('[name=item]')).value = "";
+
+      save2LocalStorage(JSON.stringify(items));
       render();
     }
 
-    function render() {
-      items.map((wa) => { return console.log(wa.text) });
-
-      itemsList.innerHTML = items.map((wa) => { return `<li> ${wa.text} </li>` }).join('');
-
+    function save2LocalStorage(data) {
+      localStorage.setItem("Items", data);
     }
+
+    function render() {
+      let data = JSON.parse(loadFromLocalStorage());
+      itemsList.innerHTML = items.map((data) => { return `<li> ${data.text} </li>` }).join('');
+    }
+
+    function loadFromLocalStorage() {
+      let data = localStorage.getItem("Items");
+      return data;
+    }
+
+
 
 
 
