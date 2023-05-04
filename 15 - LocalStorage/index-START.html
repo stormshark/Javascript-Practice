@@ -71,7 +71,9 @@
 
     function render() {
       let data = JSON.parse(loadFromLocalStorage());
-      itemsList.innerHTML = items.map((data) => { return `<li> ${data.text} </li>` }).join('');
+      itemsList.innerHTML = items.map((data, i) => {
+        return `<li>  <input type="checkbox" name="${data.text}${i}" id="${data.text}${i}"> <label for="${data.text}${i}">${data.text}</label>    </li>`
+      }).join('');
     }
 
     function loadFromLocalStorage() {
