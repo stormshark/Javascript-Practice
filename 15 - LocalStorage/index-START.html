@@ -61,18 +61,18 @@
       items.push(item);
       (this.querySelector('[name=item]')).value = "";
 
-      save2LocalStorage(JSON.stringify(items));
+      save2LocalStorage(items);
       render();
     }
 
     function save2LocalStorage(data) {
-      localStorage.setItem("Items", data);
+      localStorage.setItem("Items", JSON.stringify(data));
     }
 
     function render() {
       let data = JSON.parse(loadFromLocalStorage());
       itemsList.innerHTML = items.map((data, i) => {
-        return `<li>  <input type="checkbox" name="${data.text}${i}" id="${data.text}${i}"> <label for="${data.text}${i}">${data.text}</label>    </li>`
+        return `<li>  <input type="checkbox" data-index=${i} name="${data.text}${i}" id="${data.text}${i}" ${data.done ? 'checked' : ''}> <label for="${data.text}${i}">${data.text}</label>    </li>`
       }).join('');
     }
 
@@ -81,7 +81,20 @@
       return data;
     }
 
+    // const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    // checkboxes.forEach(x => x
 
+    itemsList.addEventListener('click', toggle);
+
+    function toggle(e) {
+      if (e.target.matches('input')) {
+        let selectedIndex = e.target.dataset.index;
+        let data = JSON.parse(loadFromLocalStorage());
+        data[selectedIndex].done = !data[selectedIndex].done;
+        save2LocalStorage(data);
+      }
+
+    }
 
 
 
