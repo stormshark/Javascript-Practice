@@ -53,18 +53,11 @@
       'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
 
     const prefixRegex = /The |An |A /i
-    //before compare each element just remove prefix then sort
-    //console.log(bands[0].replace(prefixRegex, 'aaaa'));
-
-
-    //const newbands = bands.sort();
     const n2band = bands.sort(compareWithoutPrefix);
-    //console.log(newbands);
     console.log(n2band);
 
     function compareWithoutPrefix(f, l) {
-      // console.log(f.replace(prefixRegex, ''));
-      // console.log(l.replace(prefixRegex, ''));
+
 
       if (f.replace(prefixRegex, '') < l.replace(prefixRegex, '')) {
         return -1;
