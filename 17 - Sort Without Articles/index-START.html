@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Sort Without Articles</title>
 </head>
+
 <body>
 
   <style>
@@ -26,12 +28,12 @@
       padding: 0;
       box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
     }
-    
+
     #bands li {
       border-bottom: 1px solid #efefef;
       padding: 20px;
     }
-    
+
     #bands li:last-child {
       border-bottom: 0;
     }
@@ -40,16 +42,43 @@
       color: #ffc600;
       text-decoration: none;
     }
-
   </style>
 
   <ul id="bands"></ul>
 
-<script>
-const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+  <script>
+    const bands = ['The Plot in You', 'The Devil Wears Prada',
+      'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything',
+      'The Midway State', 'We Came as Romans', 'Counterparts',
+      'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+
+    const prefixRegex = /The |An |A /i
+    //before compare each element just remove prefix then sort
+    //console.log(bands[0].replace(prefixRegex, 'aaaa'));
 
 
-</script>
+    //const newbands = bands.sort();
+    const n2band = bands.sort(compareWithoutPrefix);
+    //console.log(newbands);
+    console.log(n2band);
+
+    function compareWithoutPrefix(f, l) {
+      // console.log(f.replace(prefixRegex, ''));
+      // console.log(l.replace(prefixRegex, ''));
+
+      if (f.replace(prefixRegex, '') < l.replace(prefixRegex, '')) {
+        return -1;
+      }
+      if (f.replace(prefixRegex, '') > l.replace(prefixRegex, '')) {
+        return 1;
+      }
+      else
+        return 0;
+
+    }
+
+  </script>
 
 </body>
+
 </html>
