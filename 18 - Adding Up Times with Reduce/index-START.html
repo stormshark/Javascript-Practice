@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Videos</title>
 </head>
+
 <body>
   <ul class="videos">
     <li data-time="5:43">
@@ -181,7 +183,27 @@
       Video 58
     </li>
   </ul>
-<script>
-</script>
+  <script>
+    let totalVideoTime = 0;
+    const videotimes = document.querySelectorAll('.videos li');
+    videotimes.forEach(minutesConverter);
+
+    function minutesConverter(stringTime) {
+      let times = stringTime.dataset.time.split(':');
+      let totalSecond = times[0] * 60 + times[1] * 1;
+      totalVideoTime = totalVideoTime + totalSecond;
+      console.log(totalSecond);
+      console.log(totalVideoTime);
+    }
+
+    let totalVideoHour = Math.floor(totalVideoTime / 3600);
+    let totalVideoMinute = Math.floor((totalVideoTime - totalVideoHour * 3600) / 60);
+    let totalVideoSecond = totalVideoTime - totalVideoHour * 3600 - totalVideoMinute * 60;
+
+    console.log('time: ' + totalVideoHour + ' Minutes: ' + totalVideoMinute + ' Second: ' + totalVideoSecond);
+
+
+  </script>
 </body>
+
 </html>
